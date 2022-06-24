@@ -4,10 +4,13 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 # Create your views here.
+from django.shortcuts import render, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+# from django.contrib.auth import authenticate, login
 from .forms import LoginForm, SignUpForm
-
+# from django.contrib.auth.forms import AuthenticationForm
+# from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth import authenticate,login,logout
 
 def login_view(request):
     form = LoginForm(request.POST or None)
@@ -22,7 +25,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("/")
+                return redirect("home")
             else:
                 msg = 'Invalid credentials'
         else:
@@ -45,8 +48,8 @@ def register_user(request):
 
             msg = 'User created - please <a href="/login">login</a>.'
             success = True
-
-            # return redirect("/login/")
+            # return render(request, 'accounts/login.html', {"form": form})
+            return redirect("login")
 
         else:
             msg = 'Form is not valid'
@@ -54,3 +57,8 @@ def register_user(request):
         form = SignUpForm()
 
     return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success})
+
+
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect('/login/')
