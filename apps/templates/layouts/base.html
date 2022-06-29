@@ -35,6 +35,13 @@
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}{% endblock javascripts %}
-
+<script>
+  $(document).ready(function() {
+ 
+      setTimeout(function() {
+          $('.message1').fadeOut('slow');
+      }, 2000); 
+  });
+</script>
 </body>
 </html>

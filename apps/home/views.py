@@ -2,6 +2,7 @@ from django import template
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
+from django.contrib import messages
 from django.urls import reverse
 from .forms import Studentregistration
 from django.contrib.auth import authenticate,login,logout
@@ -14,8 +15,10 @@ User = get_user_model()
 @login_required(login_url="/login/")
 def index(request):
     ############ This query is for show all signup form in dasboard using count method ###########
-    stud = Student.objects.all().count()   
-    context = {'segment': 'index','stud':stud}
+    text = Student.objects.all() 
+    stud = text.count()
+    print(stud,"============================stud")
+    context = {'segment':'index','stud':stud, 'stu':text}
 
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
@@ -63,9 +66,9 @@ def register_user(request):
 
             msg = 'User created - please <a href="/login">login</a>.'
             success = True
-       
+            messages.success(request, 'Add successfully.')
             # return render(request, 'accounts/login.html', {"form": form})
-            return redirect("login")
+            return redirect("home")
 
         else:
             msg = 'Form is not valid'
@@ -78,3 +81,25 @@ def register_user(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/login/')
+
+
+def delete_data(request, id):
+   
+     pi = Student.objects.get(pk=id)
+     pi.delete()
+     messages.success(request, 'Delete successfully.')
+     return redirect('/')
+
+
+def update_data(request, id):
+    pi = Student.objects.get(pk=id)
+    if request.method == 'POST':
+        fm = Studentregistration(request.POST,request.FILES, instance=pi)
+        print(fm.is_valid(),"=============================fm.is_valid()")
+        if fm.is_valid():
+            messages.success(request, 'Update successfully.')
+            fm.save()
+           
+    fm = Studentregistration(instance=pi)
+    
+    return render(request, 'home/update-registration-form.html', {'form':fm})
