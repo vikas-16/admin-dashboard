@@ -1,0 +1,75 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+
+{% block body_class %} sidebar-mini {% endblock body_class %} 
+
+{% block stylesheets %}
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+<link rel="stylesheet" href="{{ ASSETS_ROOT }}/plugins/fontawesome-free/css/all.min.css">
+
+<link rel="stylesheet" href="{{ ASSETS_ROOT }}/css/adminlte.min.css">
+
+
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+ 
+  <link rel="stylesheet" href="{{ ASSETS_ROOT }}/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+
+  <link rel="stylesheet" href="{{ ASSETS_ROOT }}/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+
+  <link rel="stylesheet" href="{{ ASSETS_ROOT }}/plugins/jqvmap/jqvmap.min.css">
+
+  <link rel="stylesheet" href="{{ ASSETS_ROOT }}/css/adminlte.min.css">
+
+  <link rel="stylesheet" href="{{ ASSETS_ROOT }}/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+ 
+  <link rel="stylesheet" href="{{ ASSETS_ROOT }}/plugins/daterangepicker/daterangepicker.css">
+
+  <link rel="stylesheet" href="{{ ASSETS_ROOT }}/plugins/summernote/summernote-bs4.min.css">
+
+{% endblock stylesheets %}
+{% block content %}
+<div class="row">
+    
+    <div class="col-4 offset-2">
+      <br><br><br>
+        <h5 class="alert alert-info">Update</h5>
+   
+        <form action="" method="post" enctype="multipart/form-data">
+            {% include 'home/messages.html' %}
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary" value="Update">Update</button>
+        
+        </form>
+    </div>
+</div>
+{% endblock content%}
+
+{% block javascripts %}
+
+
+  <script src="{{ ASSETS_ROOT }}/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="{{ ASSETS_ROOT }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- bs-custom-file-input -->
+  <script src="{{ ASSETS_ROOT }}/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="{{ ASSETS_ROOT }}/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="{{ ASSETS_ROOT }}/js/demo.js"></script>
+  <script>
+  $(function () {
+    bsCustomFileInput.init();
+  });
+  </script>
+
+{% endblock javascripts %}
