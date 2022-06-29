@@ -1,10 +1,11 @@
-# -*- encoding: utf-8 -*-
-"""
-Copyright (c) 2019 - present AppSeed.us
-"""
-
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+from django.utils.translation import ugettext_lazy as _
 
-# Create your models here.
 
+class Student(models.Model):
+
+    name = models.CharField(max_length=70)
+    email = models.CharField(max_length=70)
+    password = models.CharField(max_length=70)
+  
