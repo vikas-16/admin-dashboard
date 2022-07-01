@@ -9,16 +9,22 @@ from django.contrib.auth import authenticate,login,logout
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from .models import Student
-
+from django.contrib.auth.models import User  
+from django.contrib.auth import get_user_model
 
 User = get_user_model()
 @login_required(login_url="/login/")
 def index(request):
     ############ This query is for show all signup form in dasboard using count method ###########
     text = Student.objects.all() 
-    stud = text.count()
-    print(stud,"============================stud")
-    context = {'segment':'index','stud':stud, 'stu':text}
+    stu = text.count()  ######Fisrt Method##########
+    active_user = User.objects.filter(is_active=True).count()###Second Method#####
+    active_test = User.objects.filter(is_active=False).count()###Second Method#####
+    active = User.objects.filter(is_superuser =True).count()###Second Method#####
+    staff = User.objects.filter(is_staff=True).count()###Second Method#####
+    all_user = get_user_model().objects.all().count()###Second Method#####
+    # print(stud,"============================stud")
+    context = {'segment':'index','stud':stu,'all_user_text':all_user, 'stu':text,'active_user':active_user,'activetext':active, 'staff':staff, 'active_test':active_test}
 
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
@@ -54,8 +60,7 @@ def register_user(request):
    
     if request.method == "POST":
         form = Studentregistration(request.POST)
-        # stud = Student.objects.all().count()
-        # print(stud,'============stud')
+       
         print(form.is_valid(),form.errors,"++++++++++++++++++++++++++=")
         print(form.is_valid(),"======================form")
         if form.is_valid():
