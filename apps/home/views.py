@@ -16,7 +16,7 @@ User = get_user_model()
 @login_required(login_url="/login/")
 def index(request):
     ############ This query is for show all signup form in dasboard using count method ###########
-    text = Student.objects.all() 
+    text = Student.objects.all() ######Fisrt Method##########
     stu = text.count()  ######Fisrt Method##########
     active_user = User.objects.filter(is_active=True).count()###Second Method#####
     active_test = User.objects.filter(is_active=False).count()###Second Method#####
