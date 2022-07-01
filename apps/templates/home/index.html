@@ -44,7 +44,7 @@
  
     <div class="content-header">
       <div class="container-fluid">
-        <div class="row mb-2">
+        <div class="cal-lg-8">
           <div class="col-sm-6">
             <h1 class="m-0 text-dark">Dashboard</h1>
           </div>
@@ -57,18 +57,18 @@
         </div>
       </div>
     </div>
-   
+    
     <section class="content">
       <div class="container-fluid">
       
-        <div class="row">
+        <div class="" style="display: inline-flex;">
           <div class="col-lg-3 col-6">
          
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3>{{active_user}}</h3>
 
-                <p>Projects</p>
+                <p>Active user</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
@@ -81,9 +81,9 @@
            
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>{{activetext}}<sup style="font-size: 20px"></h3>
 
-                <p>Task</p>
+                <p>Susuperuser status</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
@@ -111,9 +111,9 @@
          
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>65</h3>
+                <h3>{{staff}}</h3>
 
-                <p>Unique</p>
+                <p>Staff status</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
@@ -122,6 +122,43 @@
             </div>
           </div>
          
+
+          <div class="col-lg-3 col-6">
+         
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>{{active_test}}</h3>
+
+                <p>In Active user</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+         
+          <div class="col-lg-3 col-6">
+         
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>{{all_user_text}}</h3>
+
+                <p>All Users</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+         
+
+
+
+
+
+
         </div>
       
         <div class="row">
