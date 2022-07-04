@@ -11,13 +11,13 @@ urlpatterns = [
 
     # The home page
     path('', views.index, name='home'),
-
-    path('user-register/', register_user, name="user_register"),
+    path('user-register/', views.register_user, name="user_register"),
     # path('login/', login_view, name="user_login"),
     # path("logout/", LogoutView.as_view(), name="logout")
     # path('logout/', user_logout, name="logout1"),
     path('delete/<int:id>/', views.delete_data, name="deletedata"),
     path('update/<int:id>/', views.update_data, name="updatedata"),
+    # path('/', views.view_data, name="view_data"),
     re_path(r'^.*\.*', views.pages, name='pages'),
 
 ]
