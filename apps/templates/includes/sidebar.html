@@ -3,7 +3,7 @@
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
       <img src="{{ ASSETS_ROOT }}/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">{{request.user.username }}</span>
     </a>
 
     <!-- Sidebar -->
@@ -45,7 +45,7 @@
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            <!-- <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/index.html" class="nav-link {% if 'index.html' in segment %} active {% endif %}">
                   <i class="far fa-circle nav-icon"></i>
@@ -64,9 +64,9 @@
                   <p>Dashboard v3</p>
                 </a>
               </li>
-            </ul>
+            </ul> -->
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="widgets.html" class="nav-link {% if 'widgets' in segment %} active {% endif %}">
               <i class="nav-icon fas fa-th"></i>
               <p>
@@ -74,8 +74,8 @@
                 <span class="right badge badge-danger">New</span>
               </p>
             </a>
-          </li>
-          <li class="nav-item has-treeview {% if 'layout' in segment %} menu-open {% endif %}">
+          </li> -->
+          <!-- <li class="nav-item has-treeview {% if 'layout' in segment %} menu-open {% endif %}">
             <a href="#" class="nav-link {% if 'layout' in segment %} active {% endif %}">
               <i class="nav-icon fas fa-copy"></i>
               <p>
@@ -122,8 +122,8 @@
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-item has-treeview {% if 'charts' in segment %} menu-open {% endif %}">
+          </li> -->
+          <!-- <li class="nav-item has-treeview {% if 'charts' in segment %} menu-open {% endif %}">
             <a href="#" class="nav-link {% if 'charts' in segment %} active {% endif %}">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
@@ -151,8 +151,8 @@
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-item has-treeview {% if 'ui-' in segment %} menu-open {% endif %}">
+          </li> -->
+          <!-- <li class="nav-item has-treeview {% if 'ui-' in segment %} menu-open {% endif %}">
             <a href="#" class="nav-link {% if 'ui-' in segment %} active {% endif %}">
               <i class="nav-icon fas fa-tree"></i>
               <p>
@@ -210,7 +210,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
           <li class="nav-item has-treeview {% if 'forms-' in segment %} menu-open {% endif %}">
             <a href="#" class="nav-link {% if 'forms-' in segment %} active {% endif %}">
               <i class="nav-icon fas fa-edit"></i>
@@ -246,7 +246,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview {% if 'tables-' in segment %} menu-open {% endif %}">
+          <!-- <li class="nav-item has-treeview {% if 'tables-' in segment %} menu-open {% endif %}">
             <a href="#" class="nav-link {% if 'tables-' in segment %} active {% endif %}">
               <i class="nav-icon fas fa-table"></i>
               <p>
@@ -274,8 +274,8 @@
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-header">EXAMPLES</li>
+          </li> -->
+          <!-- <li class="nav-header">EXAMPLES</li>
           <li class="nav-item">
             <a href="/calendar.html" class="nav-link">
               <i class="nav-icon far fa-calendar-alt"></i>
@@ -543,7 +543,7 @@
               <i class="nav-icon far fa-circle text-info"></i>
               <p>Informational</p>
             </a>
-          </li>
+          </li> -->
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

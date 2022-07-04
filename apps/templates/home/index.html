@@ -48,12 +48,12 @@
           <div class="col-sm-6">
             <h1 class="m-0 text-dark">Dashboard</h1>
           </div>
-          <div class="col-sm-6">
+          <!-- <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">Dashboard v1</li>
             </ol>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -65,8 +65,8 @@
           <div class="col-lg-3 col-6">
          
             <div class="small-box bg-info">
-              <div class="inner">
-                <h3>{{active_user}}</h3>
+              <div class="inner"> 
+                <h3>{{user_data.actifs}}</h3>
 
                 <p>Active user</p>
               </div>
@@ -81,7 +81,7 @@
            
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>{{activetext}}<sup style="font-size: 20px"></h3>
+                <h3>{{user_data.issuper}}<sup style="font-size: 20px"></h3>
 
                 <p>Susuperuser status</p>
               </div>
@@ -96,7 +96,7 @@
           
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>{{stud}}</h3>
+                <h3>{{count_stu}}</h3>
 
                 <p>User Registrations</p>
               </div>
@@ -111,7 +111,7 @@
          
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>{{staff}}</h3>
+                <h3>{{user_data.isstaff}}</h3>
 
                 <p>Staff status</p>
               </div>
@@ -127,7 +127,7 @@
          
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>{{active_test}}</h3>
+                <h3>{{user_data.inactifs}}</h3>
 
                 <p>In Active user</p>
               </div>
@@ -142,7 +142,7 @@
          
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>{{all_user_text}}</h3>
+                <h3>{{user_data.all_user}}</h3>
 
                 <p>All Users</p>
               </div>

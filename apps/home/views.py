@@ -10,24 +10,52 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from .models import Student
 from django.contrib.auth.models import User  
-from django.contrib.auth import get_user_model
+from django.db.models import Count
+from django.db.models import Count, Q
+
+
+# User = get_user_model()
+# @login_required(login_url="/login/")
+# def index(request):
+#     ############ This query is for show all signup form in dasboard using count method ###########
+#     text = Student.objects.all() ######Fisrt Method##########
+#     stu = text.count()  ######Fisrt Method##########
+#     active_user = User.objects.filter(is_active=True).count()###Second Method#####
+#     active_test = User.objects.filter(is_active=False).count()###Second Method#####
+#     active = User.objects.filter(is_superuser =True).count()###Second Method#####
+#     staff = User.objects.filter(is_staff=True).count()###Second Method#####
+#     all_user = get_user_model().objects.all().count()###Second Method#####
+#     # print(stud,"============================stud")
+#     context = {'segment':'index','stud':stu,'all_user_text':all_user, 'stu':text,'active_user':active_user,'activetext':active, 'staff':staff, 'active_test':active_test}
+
+#     html_template = loader.get_template('home/index.html')
+#     return HttpResponse(html_template.render(context, request))
+
 
 User = get_user_model()
 @login_required(login_url="/login/")
 def index(request):
-    ############ This query is for show all signup form in dasboard using count method ###########
-    text = Student.objects.all() 
-    stu = text.count()  ######Fisrt Method##########
-    active_user = User.objects.filter(is_active=True).count()###Second Method#####
-    active_test = User.objects.filter(is_active=False).count()###Second Method#####
-    active = User.objects.filter(is_superuser =True).count()###Second Method#####
-    staff = User.objects.filter(is_staff=True).count()###Second Method#####
-    all_user = get_user_model().objects.all().count()###Second Method#####
-    # print(stud,"============================stud")
-    context = {'segment':'index','stud':stu,'all_user_text':all_user, 'stu':text,'active_user':active_user,'activetext':active, 'staff':staff, 'active_test':active_test}
-
+    
+    text = Student.objects.all()
+    count_stu = text.count()
+    user_data =  User.objects.aggregate(
+    actifs=Count('is_active', filter=Q(is_active=True)), 
+    inactifs=Count('is_active', filter=Q(is_active=False)),
+    issuper=Count('is_superuser', filter=Q(is_superuser=True)),
+    isstaff=Count('is_staff', filter=Q(is_staff=False)) ,
+    all_user = Count('pk')
+    )
+    name = request.POST.get('name', None)
+    if name:
+      text = Student.objects.filter(Q(name__icontains=name) | Q(email__icontains=name) | Q(password__icontains=name)) 
+    else:
+        text = Student.objects.all()
+    context = {'segment':'index','stu':text,'count_stu':count_stu,'user_data':user_data}
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
+
+
+
 
 
 @login_required(login_url="/login/")
@@ -52,6 +80,21 @@ def pages(request):
     except:
         html_template = loader.get_template('home/page-500.html')
         return HttpResponse(html_template.render(context, request))
+
+
+# def view_data(request):
+  
+#     name = request.GET.get('name', None)
+  
+#     if name:
+#       stud = Student.objects.filter(Q(name__icontains=name) | Q(email__icontains=name) | Q(password__icontains=name)) 
+      
+#     else:
+      
+#         stud = Student.objects.all()
+#         #messages.success(request, 'Not find any matching.')
+#     return render(request, 'home/index.html', {'stu':stud})
+
 
 
 def register_user(request):
@@ -106,5 +149,4 @@ def update_data(request, id):
             fm.save()
            
     fm = Studentregistration(instance=pi)
-    
     return render(request, 'home/update-registration-form.html', {'form':fm})
