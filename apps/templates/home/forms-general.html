@@ -54,9 +54,17 @@
                 {% include 'home/messages.html' %}
                 {% csrf_token%}
                 <div class="card-body">
-                  <div class="form-group">
+
+                  <form method ="POST" enctype="multipart/form-data" autocomplete="off">
+                    {% csrf_token%}
+                    {{form.as_p}}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+
+
+                  <!-- <div class="form-group">
                     <label for="exampleInputEmail1">Username</label>
-                    <input type="text" class="form-control" id="exampleInputusername" placeholder="Enter email" name="name">
+                    <input type="text" class="form-control" id="exampleInputusername" placeholder="Enter username" name="name">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
@@ -66,7 +74,7 @@
                   <div class="form-group">
                     <label for="exampleInputEmail1">Password</label>
                     <input type="password" class="form-control" id="exampleInputpassword" placeholder="Enter email" name="password">
-                  </div>
+                  </div> -->
                  
                   <!-- <div class="form-group">
                     <label for="exampleInputFile">File input</label>
@@ -87,9 +95,9 @@
                 </div>
                 <!-- /.card-body -->
 
-                <div class="card-footer">
+                <!-- <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
+                </div> -->
               </form>
             </div>
             <!-- /.card -->

@@ -81,49 +81,24 @@ def pages(request):
         html_template = loader.get_template('home/page-500.html')
         return HttpResponse(html_template.render(context, request))
 
-
-# def view_data(request):
-  
-#     name = request.GET.get('name', None)
-  
-#     if name:
-#       stud = Student.objects.filter(Q(name__icontains=name) | Q(email__icontains=name) | Q(password__icontains=name)) 
-      
-#     else:
-      
-#         stud = Student.objects.all()
-#         #messages.success(request, 'Not find any matching.')
-#     return render(request, 'home/index.html', {'stu':stud})
-
-
-
 def register_user(request):
-    msg = None
-    success = False
-   
     if request.method == "POST":
         form = Studentregistration(request.POST)
-       
-        print(form.is_valid(),form.errors,"++++++++++++++++++++++++++=")
-        print(form.is_valid(),"======================form")
+        # print(form.is_valid(),form.errors,"++++++++++++++++++++++++++=")
+        # print(form.is_valid(),"======================form")
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get("username")
             raw_password = form.cleaned_data.get("password1")
             user = authenticate(username=username, password=raw_password)
-
-            msg = 'User created - please <a href="/login">login</a>.'
-            success = True
             messages.success(request, 'Add successfully.')
             # return render(request, 'accounts/login.html', {"form": form})
             return redirect("home")
-
         else:
             msg = 'Form is not valid'
     else:
         form = Studentregistration()
-
-    return render(request, "home/forms-general.html", {"form": form, "msg": msg, "success": success})
+    return render(request, "home/forms-general.html", {"form": form})
 
 
 def user_logout(request):
@@ -132,7 +107,6 @@ def user_logout(request):
 
 
 def delete_data(request, id):
-   
      pi = Student.objects.get(pk=id)
      pi.delete()
      messages.success(request, 'Delete successfully.')
@@ -147,6 +121,5 @@ def update_data(request, id):
         if fm.is_valid():
             messages.success(request, 'Update successfully.')
             fm.save()
-           
     fm = Studentregistration(instance=pi)
     return render(request, 'home/update-registration-form.html', {'form':fm})
