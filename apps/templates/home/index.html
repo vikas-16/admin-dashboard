@@ -39,7 +39,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 {% endblock stylesheets %}
-
 {% block content %}
   
   <div class="content-wrapper">
@@ -96,8 +95,7 @@
           </div>
         
           <div class="col-lg-3 col-6">
-          
-            <div class="small-box bg-warning">
+          <div class="small-box bg-warning">
               <div class="inner">
                 <h3>{{count_stu}}</h3>
 
@@ -110,9 +108,8 @@
             </div>
           </div>
          
-          <div class="col-lg-3 col-6">
-         
-            <div class="small-box bg-danger">
+           <div class="col-lg-3 col-6">
+             <div class="small-box bg-danger">
               <div class="inner">
                 <h3>{{user_data.isstaff}}</h3>
 
@@ -127,7 +124,6 @@
          
 
           <div class="col-lg-3 col-6">
-         
             <div class="small-box bg-danger">
               <div class="inner">
                 <h3>{{user_data.inactifs}}</h3>
@@ -142,7 +138,6 @@
           </div>
          
           <div class="col-lg-3 col-6">
-         
             <div class="small-box bg-danger">
               <div class="inner">
                 <h3>{{user_data.all_user}}</h3>
@@ -174,8 +169,6 @@
 
 
     <section class="content">
-
-     
       <div class="card">
         <div class="card-header">
           <!-- <h3 class="card-title">Projects</h3> -->
@@ -222,7 +215,7 @@
                         {{ forloop.counter }}
                       </td>
                       <td>
-                        {{st.name}}
+                        {{st.username}}
                       </td>
                       <td>
                         {{st.email}}
@@ -234,37 +227,26 @@
                        <span class="text1" style="display: none;">{{st.password}}</span>
                        <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                       </td>
-                     
-                     
                       <td class="project-actions text-right">
                          <a class="btn btn-info btn-sm" href="{% url 'updatedata' st.id %}">
                               <i class="fas fa-pencil-alt">
                               </i>
                               Edit
-                        </a>
-                        
-
-<a class="btn btn-danger btn-sm" href="{% url 'deletedata' st.id %}">
+                         </a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'deletedata' st.id %}">
                             <i class="fas fa-trash">
                             </i>
                             Delete
-                          </a>
-
-                         
+                        </a>
                       </td>
                    </tr>
                   {% endfor %}
-             
-                 
-               
-              </tbody>
+             </tbody>
           </table>
           {%  else%}
         </div>
         {%  endif %}
       </div>
-    
-
     </section>
 
 

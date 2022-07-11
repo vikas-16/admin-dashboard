@@ -10,11 +10,11 @@ from .models import *
 class Studentregistration(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ['city','name','email','password']
+        fields = ['city','username','email','password']
         
         widgets= {
             'city': forms.Select(attrs={'class':'form-control', 'autocomplete':'off'}),
-            'name': forms.TextInput(attrs={'class':'form-control', 'autocomplete':'off'}),
+            'username': forms.TextInput(attrs={'class':'form-control', 'autocomplete':'off'}),
             'email': forms.TextInput(attrs={'class':'form-control', 'autocomplete':'off'}),
             'password': forms.PasswordInput(render_value=True, attrs={'class':'form-control', 'autocomplete':'off'}),
             }

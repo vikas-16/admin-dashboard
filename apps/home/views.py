@@ -10,8 +10,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from .models import Student
 from django.contrib.auth.models import User  
-from django.db.models import Count
-from django.db.models import Count, Q
+from django.db.models import Count,Q
+from django.contrib.auth.hashers import make_password
 
 
 # User = get_user_model()
@@ -35,8 +35,7 @@ from django.db.models import Count, Q
 User = get_user_model()
 @login_required(login_url="/login/")
 def index(request):
-    
-    text = Student.objects.all()
+    text = User.objects.all()
     count_stu = text.count()
     user_data =  User.objects.aggregate(
     actifs=Count('is_active', filter=Q(is_active=True)), 
@@ -47,9 +46,9 @@ def index(request):
     )
     name = request.POST.get('name', None)
     if name:
-      text = Student.objects.filter(Q(name__icontains=name) | Q(email__icontains=name) | Q(password__icontains=name)) 
+      text = User.objects.filter(Q(name__icontains=name) | Q(email__icontains=name) | Q(password__icontains=name)) 
     else:
-        text = Student.objects.all()
+        text = User.objects.all()
     context = {'segment':'index','stu':text,'count_stu':count_stu,'user_data':user_data}
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
@@ -87,10 +86,13 @@ def register_user(request):
         # print(form.is_valid(),form.errors,"++++++++++++++++++++++++++=")
         # print(form.is_valid(),"======================form")
         if form.is_valid():
-            form.save()
+         
             username = form.cleaned_data.get("username")
-            raw_password = form.cleaned_data.get("password1")
-            user = authenticate(username=username, password=raw_password)
+            raw_password = make_password(form.cleaned_data.get("password"))
+            newUser= User.objects.create(username=username, password=raw_password)
+            newUser.is_staff=True
+            newUser.save()
+            
             messages.success(request, 'Add successfully.')
             # return render(request, 'accounts/login.html', {"form": form})
             return redirect("home")
@@ -101,20 +103,40 @@ def register_user(request):
     return render(request, "home/forms-general.html", {"form": form})
 
 
+
+# def register(request):
+#     if request.method == "post":
+#         register = register_form(request.post)
+#         if register.is_valid():
+#             register.save()
+#             newUser=User(username=request.POST['username'],
+#                          email=request.POST['email'],
+#                          password=request.POST['password'])
+#             newUser.save()
+#             new_profile = profile(user=newUser,
+#                           first_name=request.POST["first_name"],
+#                           last_name=request.POST["last_name"])
+#             new_profile.save()
+#             return render(request,'users/success.html')
+#     else:
+#         register = register_form()
+#     return render(request,'users/register.html',{"register":register})
+
+
+
+
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/login/')
 
-
 def delete_data(request, id):
-     pi = Student.objects.get(pk=id)
+     pi = User.objects.get(pk=id)
      pi.delete()
      messages.success(request, 'Delete successfully.')
      return redirect('/')
 
-
 def update_data(request, id):
-    pi = Student.objects.get(pk=id)
+    pi = User.objects.get(pk=id)
     if request.method == 'POST':
         fm = Studentregistration(request.POST,request.FILES, instance=pi)
         print(fm.is_valid(),"=============================fm.is_valid()")
